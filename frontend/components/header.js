@@ -6,7 +6,7 @@
 // ============================================================
 
 async function renderHeader(basePath = '') {
-  const BACKEND = '/api';
+  const BACKEND = '';
 
   // Obtenemos el usuario autenticado para mostrar su inicial.
   const { data: { session } } = await supabaseClient.auth.getSession();

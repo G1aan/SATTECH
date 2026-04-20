@@ -3,7 +3,7 @@
 // ============================================================
 
 function initSatView() {
-  const BACKEND = '/api';
+  const BACKEND = '';
   const params = new URLSearchParams(window.location.search);
   const satId = params.get('id');
 

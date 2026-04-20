@@ -3,7 +3,7 @@
 // ============================================================
 
 function initTecnicos() {
-  const BACKEND = '/api';
+  const BACKEND = '';
   const listContainer = document.getElementById('tecnicosList');
   const alertBox = document.getElementById('tecnicosAlert');
   const emptyBox = document.getElementById('tecnicosEmpty');

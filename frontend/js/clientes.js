@@ -3,7 +3,7 @@
 // ============================================================
 
 function initClientes() {
-  const BACKEND = '/api';
+  const BACKEND = '';
   const listContainer = document.getElementById('clientesList');
   const alertBox = document.getElementById('clientesAlert');
   const emptyBox = document.getElementById('clientesEmpty');
