@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crear Cliente — MiSaaS</title>
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/header.css" />
+  <link rel="stylesheet" href="../css/forms.css" />
+</head>
+<body>
+
+  <div id="app-header"></div>
+
+  <main class="form-page-container">
+    <h2 id="clientePageTitle">🏢 Crear nuevo cliente</h2>
+
+    <div id="formAlert" class="form-alert error hidden"></div>
+
+    <div class="form-section-card">
+      <h3>📋 Datos básicos</h3>
+      <div class="fields-grid">
+        <div class="form-group">
+          <label for="codigo">Código cliente * <small style="color:#94a3b8">(7 dígitos)</small></label>
+          <input type="text" id="codigo" maxlength="7" placeholder="0001234" />
+        </div>
+        <div class="form-group">
+          <label for="nombre">Nombre / Razón social *</label>
+          <input type="text" id="nombre" placeholder="Hotel Ejemplo S.L." />
+        </div>
+        <div class="form-group">
+          <label for="email">Email *</label>
+          <input type="email" id="email" placeholder="contacto@empresa.com" />
+        </div>
+        <div class="form-group">
+          <label for="telefono">Teléfono</label>
+          <input type="tel" id="telefono" placeholder="600 000 000" />
+        </div>
+        <div class="form-group">
+          <label for="horarioInicio">Horario visita inicio *</label>
+          <input type="time" id="horarioInicio" />
+        </div>
+        <div class="form-group">
+          <label for="horarioFin">Horario visita fin *</label>
+          <input type="time" id="horarioFin" />
+        </div>
+      </div>
+    </div>
+
+    <div class="form-section-card">
+      <h3>📍 Domicilios</h3>
+      <div class="dynamic-block" id="domiciliosContainer"></div>
+      <button type="button" class="btn-add" id="btnAddDomicilio">+ Añadir domicilio</button>
+    </div>
+
+    <div class="form-actions">
+      <a href="clientes.html" class="btn-secondary" id="btnCancelar">← Cancelar</a>
+      <div class="form-actions-right">
+        <button type="button" class="btn-danger hidden" id="btnEliminarCliente">Eliminar cliente</button>
+        <button type="button" class="btn-primary" id="btnGuardar">
+          <span id="btnGuardarText">✅ Crear Cliente</span>
+          <span id="btnGuardarSpinner" class="spinner hidden"></span>
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <div class="modal-overlay hidden" id="modalExito">
+    <div class="modal-box">
+      <div class="modal-icon">🎉</div>
+      <h3 id="modalExitoTitle">Cliente creado</h3>
+      <p id="modalExitoMsg">El cliente ha sido registrado correctamente.</p>
+      <button class="btn-primary" id="btnModalOk" style="width:100%;">Ir al listado</button>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="../js/config.js"></script>
+  <script src="../components/header.js"></script>
+  <script src="../js/cliente.js"></script>
+  <script>
+    renderHeader('../');
+    initCrearCliente();
+  </script>
+
+</body>
+</html>

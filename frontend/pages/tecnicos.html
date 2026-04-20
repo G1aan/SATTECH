@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Técnicos — MiSaaS</title>
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/header.css" />
+  <link rel="stylesheet" href="../css/listados.css" />
+</head>
+<body>
+
+  <div id="app-header"></div>
+
+  <main class="list-page">
+    <div class="list-topbar">
+      <div>
+        <h2>Técnicos</h2>
+        <p>Listado general de técnicos con acceso a detalle y borrado.</p>
+      </div>
+      <a href="crear-tecnico.html" class="btn-primary">+ Crear técnico</a>
+    </div>
+
+    <div id="tecnicosAlert" class="list-alert hidden"></div>
+    <div id="tecnicosEmpty" class="list-empty hidden">
+      <h3>No hay técnicos todavía</h3>
+      <p>Usa el botón Crear técnico para añadir el primero.</p>
+      <a href="crear-tecnico.html" class="btn-primary">+ Crear técnico</a>
+    </div>
+    <section id="tecnicosList" class="list-grid" aria-label="Listado de técnicos"></section>
+  </main>
+
+  <div class="list-modal-overlay hidden" id="tecnicoModal">
+    <div class="list-modal">
+      <div class="list-modal-header">
+        <h3 id="tecnicoModalTitle">Detalle del técnico</h3>
+        <button type="button" class="list-modal-close" id="tecnicoModalClose">✕</button>
+      </div>
+      <div class="list-detail-grid" id="tecnicoModalBody"></div>
+      <div class="list-modal-actions">
+        <button type="button" class="btn-secondary" id="tecnicoModalCancel">Cerrar</button>
+        <button type="button" class="btn-primary" id="tecnicoModalEdit">Editar</button>
+        <button type="button" class="btn-danger" id="tecnicoModalDelete">Eliminar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="../js/config.js"></script>
+  <script src="../components/header.js"></script>
+  <script src="../js/tecnicos.js"></script>
+  <script>
+    renderHeader('../');
+    initTecnicos();
+  </script>
+
+</body>
+</html>

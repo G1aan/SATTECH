@@ -1,0 +1,3 @@
+# Archivos sensibles — nunca subir a control de versiones
+.env
+node_modules/

@@ -1,0 +1,160 @@
+/* ============================================================
+   login.css — Estilos exclusivos de la página de login
+   ============================================================ */
+
+body {
+  display: flex;
+}
+
+/* ── Layout ─────────────────────────────────────────────────── */
+.login-wrapper {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* ── Panel izquierdo (banner decorativo) ─────────────────────── */
+.login-banner {
+  flex: 1;
+  background:
+    radial-gradient(circle at top right, rgba(255, 255, 255, 0.16), transparent 32%),
+    linear-gradient(135deg, #0f172a 0%, #163a6b 50%, #1d4ed8 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+  position: relative;
+  overflow: hidden;
+}
+
+.login-banner::before {
+  content: '';
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+  top: -80px;
+  left: -80px;
+}
+
+.login-banner::after {
+  content: '';
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+  bottom: -60px;
+  right: -60px;
+}
+
+.banner-content {
+  position: relative;
+  z-index: 1;
+  color: #ffffff;
+  max-width: 380px;
+}
+
+.banner-content h1 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  letter-spacing: -1px;
+  margin-bottom: 16px;
+}
+
+.banner-content p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* ── Panel derecho (formulario) ─────────────────────────────── */
+.login-panel {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 24px;
+  background-color: #f8fafc;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 42px 36px;
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.12);
+  border: 1px solid rgba(219, 226, 234, 0.9);
+}
+
+.login-header {
+  margin-bottom: 28px;
+}
+
+.login-header h2 {
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 6px;
+}
+
+.login-header p {
+  font-size: 0.92rem;
+  color: #64748b;
+}
+
+/* ── Campo password ─────────────────────────────────────────── */
+.input-password-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-password-wrap input {
+  padding-right: 44px;
+}
+
+.toggle-eye {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  color: #6b7280;
+  padding: 0;
+  line-height: 1;
+  transition: color 0.15s;
+}
+
+.toggle-eye:hover {
+  color: #2563eb;
+}
+
+/* ── Botón full width en login ─────────────────────────────── */
+.login-card .btn-primary {
+  width: 100%;
+  margin-top: 4px;
+}
+
+.footer-note {
+  margin-top: 20px;
+  font-size: 0.82rem;
+  color: #94a3b8;
+  text-align: center;
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .login-banner { display: none; }
+
+  .login-panel {
+    width: 100%;
+    padding: 24px 16px;
+    background: linear-gradient(135deg, #0f172a 0%, #1d4ed8 100%);
+  }
+
+  .login-card { padding: 32px 24px; }
+}

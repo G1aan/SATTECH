@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login — MiSaaS</title>
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/login.css" />
+</head>
+<body>
+
+  <div class="login-wrapper">
+
+    <div class="login-banner">
+      <div class="banner-content">
+        <h1>MiSaaS</h1>
+        <p>Plataforma empresarial de gestión inteligente.<br>Accede a tus recursos en cualquier momento.</p>
+      </div>
+    </div>
+
+    <div class="login-panel">
+      <div class="login-card">
+
+        <div class="login-header">
+          <h2>Bienvenido de nuevo</h2>
+          <p>Ingresa tus credenciales para continuar</p>
+        </div>
+
+        <form id="loginForm" novalidate>
+
+          <div class="form-group">
+            <label for="email">Correo electrónico</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="correo@empresa.com"
+              autocomplete="email"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="password">Contraseña</label>
+            <div class="input-password-wrap">
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="••••••••"
+                autocomplete="current-password"
+                required
+              />
+              <button type="button" id="togglePassword" class="toggle-eye" title="Mostrar contraseña">
+                👁
+              </button>
+            </div>
+          </div>
+
+          <div id="errorMsg" class="error-msg hidden"></div>
+
+          <button type="submit" id="btnLogin" class="btn-primary">
+            <span id="btnText">Iniciar sesión</span>
+            <span id="btnSpinner" class="spinner hidden"></span>
+          </button>
+
+        </form>
+
+        <p class="footer-note">¿Problemas para acceder? Contacta al administrador.</p>
+
+      </div>
+    </div>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/login.js"></script>
+
+</body>
+</html>

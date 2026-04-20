@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Detalle SAT — MiSaaS</title>
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/header.css" />
+  <link rel="stylesheet" href="../css/listados.css" />
+  <link rel="stylesheet" href="../css/sat-view.css" />
+</head>
+<body>
+
+  <div id="app-header"></div>
+
+  <!-- Contenido principal del detalle del SAT -->
+  <main class="sat-view-page">
+    <!-- Cabecera con acceso rápido al listado -->
+    <div class="sat-view-topbar">
+      <div>
+        <h2 id="satViewTitle">Detalle del SAT</h2>
+        <p id="satViewSubtitle">Cargando información del servicio...</p>
+      </div>
+      <div class="sat-view-actions" id="satViewActions">
+        <a href="sats.html" class="btn-secondary">← Volver al listado</a>
+      </div>
+    </div>
+
+    <div id="satViewAlert" class="list-alert hidden"></div>
+
+    <!-- Resumen ejecutivo del SAT -->
+    <section class="sat-summary-grid" id="satSummaryGrid">
+      <article class="sat-summary-card">
+        <span class="sat-summary-label">Número SAT</span>
+        <strong id="sumNumeroSat">—</strong>
+      </article>
+      <article class="sat-summary-card">
+        <span class="sat-summary-label">Estado</span>
+        <strong id="sumEstado">—</strong>
+      </article>
+      <article class="sat-summary-card">
+        <span class="sat-summary-label">Cliente</span>
+        <strong id="sumCliente">—</strong>
+      </article>
+      <article class="sat-summary-card">
+        <span class="sat-summary-label">Técnico</span>
+        <strong id="sumTecnico">—</strong>
+      </article>
+    </section>
+
+    <!-- Tabla detallada con toda la información disponible -->
+    <section class="sat-detail-panel">
+      <h3>Ficha detallada</h3>
+      <div class="sat-table-wrap">
+        <table class="sat-detail-table">
+          <tbody id="satDetailRows"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="sat-detail-panel hidden" id="signaturePreviewPanel">
+      <h3>Firma del cliente</h3>
+      <div class="signature-preview-box">
+        <img id="signaturePreviewImage" alt="Firma del cliente" />
+      </div>
+    </section>
+  </main>
+
+  <div class="modal-overlay hidden" id="finishModalOverlay">
+    <div class="modal-box sat-finish-modal">
+      <div class="modal-header">
+        <h3>Finalizar SAT</h3>
+        <button class="modal-close" id="finishModalClose">✕</button>
+      </div>
+
+      <div class="sat-finish-body">
+        <p class="sat-finish-note">Firma del cliente y añade un comentario de cierre si lo necesitas.</p>
+
+        <div class="signature-box">
+          <canvas id="signatureCanvas" width="720" height="260"></canvas>
+        </div>
+
+        <div class="sat-finish-actions-inline">
+          <button type="button" class="btn-secondary" id="clearSignatureBtn">Limpiar firma</button>
+        </div>
+
+        <div class="form-group">
+          <label for="closingComment">Comentario de cierre</label>
+          <textarea id="closingComment" placeholder="Anota observaciones de la intervención..."></textarea>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-secondary" id="finishModalCancel">Cancelar</button>
+        <button class="btn-primary" id="finishModalConfirm">
+          <span id="finishModalText">Finalizar SAT</span>
+          <span id="finishModalSpinner" class="spinner hidden"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="../js/config.js"></script>
+  <script src="../components/header.js"></script>
+  <script src="../js/sat-view.js"></script>
+  <script>
+    renderHeader('../');
+    initSatView();
+  </script>
+
+</body>
+</html>

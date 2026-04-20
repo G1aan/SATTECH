@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clientes — MiSaaS</title>
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/header.css" />
+  <link rel="stylesheet" href="../css/clientes.css" />
+</head>
+<body>
+
+  <div id="app-header"></div>
+
+  <main class="clientes-page">
+    <div class="clientes-topbar">
+      <div>
+        <h2>Clientes</h2>
+        <p>Listado general para crear, ver, editar o eliminar clientes.</p>
+      </div>
+      <a href="crear-cliente.html" class="btn-primary">+ Crear cliente</a>
+    </div>
+
+    <div id="clientesAlert" class="clientes-alert hidden"></div>
+    <div id="clientesEmpty" class="clientes-empty hidden">
+      <h3>No hay clientes todavía</h3>
+      <p>Usa el botón Crear cliente para añadir el primero.</p>
+      <a href="crear-cliente.html" class="btn-primary">+ Crear cliente</a>
+    </div>
+    <section id="clientesList" class="clientes-list" aria-label="Listado de clientes"></section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="../js/config.js"></script>
+  <script src="../components/header.js"></script>
+  <script src="../js/clientes.js"></script>
+  <script>
+    renderHeader('../');
+    initClientes();
+  </script>
+
+</body>
+</html>

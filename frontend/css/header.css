@@ -1,0 +1,97 @@
+/* ============================================================
+   header.css — Estilos del header/navbar de la app
+   ============================================================ */
+
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 72px;
+  padding: 0 28px;
+  background: linear-gradient(135deg, #0f172a 0%, #163a6b 55%, #1d4ed8 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.16);
+  backdrop-filter: blur(10px);
+}
+
+/* ── Logo / marca ───────────────────────────────────────────── */
+.header-brand .header-logo {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-decoration: none;
+  letter-spacing: -0.03em;
+}
+
+/* ── Zona derecha ───────────────────────────────────────────── */
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ── Botones de navegación ──────────────────────────────────── */
+.btn-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  border: none;
+  font-family: inherit;
+}
+
+.btn-nav-home {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+
+.btn-nav-home:hover {
+  background: rgba(255, 255, 255, 0.18);
+  transform: translateY(-1px);
+}
+
+.btn-logout {
+  background: rgba(239, 68, 68, 0.15);
+  color: #fca5a5;
+  border: 1px solid rgba(239, 68, 68, 0.25);
+}
+
+.btn-logout:hover {
+  background: rgba(239, 68, 68, 0.3);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+/* ── Avatar con inicial ─────────────────────────────────────── */
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #dbe7ff, #9cc2ff);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+  user-select: none;
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  color: #0f172a;
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .app-header { padding: 0 16px; }
+  .btn-nav span { display: none; }
+}

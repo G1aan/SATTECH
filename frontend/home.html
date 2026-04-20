@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home — MiSaaS</title>
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/header.css" />
+  <link rel="stylesheet" href="css/home.css" />
+</head>
+<body>
+
+  <div id="app-header"></div>
+
+  <main class="home-container">
+    <h2>Panel de control</h2>
+    <p class="subtitle">Selecciona una acción para comenzar</p>
+
+    <div class="cards-grid">
+      <a href="pages/crear-sat.html" class="card card-sat">
+        <div class="card-icon">🧾</div>
+        <div class="card-title">Crear SAT</div>
+        <div class="card-desc">Abre un nuevo servicio de asistencia técnica</div>
+      </a>
+
+      <a href="pages/clientes.html" class="card card-client">
+        <div class="card-icon">🏢</div>
+        <div class="card-title">Clientes</div>
+        <div class="card-desc">Consulta, crea y gestiona clientes</div>
+      </a>
+
+      <a href="pages/tecnicos.html" class="card card-tech">
+        <div class="card-icon">👷</div>
+        <div class="card-title">Técnicos</div>
+        <div class="card-desc">Consulta, crea y gestiona técnicos</div>
+      </a>
+
+      <a href="pages/sats.html" class="card card-list">
+        <div class="card-icon">📋</div>
+        <div class="card-title">SATs</div>
+        <div class="card-desc">Consulta, crea y gestiona SATs</div>
+      </a>
+
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="js/config.js"></script>
+  <script src="components/header.js"></script>
+  <script>
+    async function redirigirSegunRol() {
+      await renderHeader('');
+
+      const { data: { session } } = await supabaseClient.auth.getSession();
+      const token = session?.access_token;
+      if (!token) {
+        return;
+      }
+
+      const response = await fetch('http://localhost:3000/api/me', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (!response.ok) {
+        return;
+      }
+
+      const json = await response.json();
+      if (json.role === 'technician') {
+        window.location.href = 'pages/mis-sats.html';
+      }
+    }
+
+    redirigirSegunRol();
+  </script>
+
+</body>
+</html>

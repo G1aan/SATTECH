@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mis SATs — MiSaaS</title>
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/header.css" />
+  <link rel="stylesheet" href="../css/listados.css" />
+</head>
+<body>
+
+  <div id="app-header"></div>
+
+  <main class="list-page" data-sat-scope="mine" data-sat-show-delete="false" data-sat-show-create="false" data-sat-mode="technician">
+    <div class="list-topbar">
+      <div>
+        <h2>Mis SATs</h2>
+        <p>Solo ves los servicios asignados a tu usuario.</p>
+      </div>
+       <button type="button" class="btn-secondary" id="btnRefreshSats">Actualizar</button>
+    </div>
+
+    <section class="list-filters">
+      <div class="form-group">
+        <label for="satSearch">Buscar</label>
+        <input type="text" id="satSearch" placeholder="Número, cliente o domicilio" />
+      </div>
+      <div class="form-group">
+        <label for="satClientFilter">Cliente</label>
+        <input type="text" id="satClientFilter" placeholder="Nombre del cliente" />
+      </div>
+      <div class="form-group">
+        <label for="satStateFilter">Estado</label>
+        <select id="satStateFilter">
+          <option value="">Todos</option>
+          <option value="pendiente">Pendiente</option>
+          <option value="acabado">Acabado</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="satSortFilter">Orden</label>
+        <select id="satSortFilter">
+          <option value="fecha_programada">Fecha programada</option>
+          <option value="fecha_cierre">Fecha de cierre</option>
+          <option value="fecha_creacion">Fecha de creación</option>
+        </select>
+      </div>
+      <div class="list-filters-actions">
+        <button type="button" class="btn-secondary" id="satResetFilters">Limpiar filtros</button>
+      </div>
+    </section>
+
+    <div id="satsAlert" class="list-alert hidden"></div>
+    <div id="satsEmpty" class="list-empty hidden">
+      <h3>No tienes SATs asignados</h3>
+      <p>Cuando un SAT te sea asignado aparecerá aquí.</p>
+    </div>
+    <section id="satsList" class="list-grid" aria-label="Listado de mis SATs"></section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="../js/config.js"></script>
+  <script src="../components/header.js"></script>
+  <script src="../js/sats-list.js"></script>
+  <script>
+    renderHeader('../');
+    initSatsList();
+  </script>
+
+</body>
+</html>

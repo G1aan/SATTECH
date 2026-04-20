@@ -1,0 +1,280 @@
+/* ============================================================
+   RESET Y BASE
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f0f4f8;
+  color: #334155;
+  min-height: 100vh;
+  display: flex;
+}
+
+/* ============================================================
+   LAYOUT PRINCIPAL
+   ============================================================ */
+.login-wrapper {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* ============================================================
+   PANEL IZQUIERDO (banner decorativo)
+   ============================================================ */
+.login-banner {
+  flex: 1;
+  background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Círculo decorativo de fondo */
+.login-banner::before {
+  content: '';
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+  top: -80px;
+  left: -80px;
+}
+
+.login-banner::after {
+  content: '';
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+  bottom: -60px;
+  right: -60px;
+}
+
+.banner-content {
+  position: relative;
+  z-index: 1;
+  color: #ffffff;
+  max-width: 380px;
+}
+
+.banner-content h1 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  letter-spacing: -1px;
+  margin-bottom: 16px;
+}
+
+.banner-content p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* ============================================================
+   PANEL DERECHO (formulario)
+   ============================================================ */
+.login-panel {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 24px;
+  background-color: #f8fafc;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 40px 36px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* ============================================================
+   ENCABEZADO DEL FORMULARIO
+   ============================================================ */
+.login-header {
+  margin-bottom: 28px;
+}
+
+.login-header h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 6px;
+}
+
+.login-header p {
+  font-size: 0.92rem;
+  color: #64748b;
+}
+
+/* ============================================================
+   GRUPOS DE CAMPO
+   ============================================================ */
+.form-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.form-group input {
+  padding: 12px 14px;
+  border: 1.5px solid #d1d5db;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  color: #1e293b;
+  background: #fafafa;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  width: 100%;
+}
+
+.form-group input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+  background: #fff;
+}
+
+/* Campo de contraseña con ojo */
+.input-password-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-password-wrap input {
+  padding-right: 44px;
+}
+
+.toggle-eye {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  color: #6b7280;
+  padding: 0;
+  line-height: 1;
+  transition: color 0.15s;
+}
+
+.toggle-eye:hover {
+  color: #2563eb;
+}
+
+/* ============================================================
+   MENSAJES DE ERROR
+   ============================================================ */
+.error-msg {
+  background: #fef2f2;
+  border: 1px solid #fca5a5;
+  color: #b91c1c;
+  font-size: 0.87rem;
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ============================================================
+   BOTÓN PRINCIPAL
+   ============================================================ */
+.btn-primary {
+  width: 100%;
+  padding: 13px;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: #fff;
+  font-size: 0.97rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: opacity 0.2s, transform 0.15s;
+  margin-top: 4px;
+}
+
+.btn-primary:hover:not(:disabled) {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.btn-primary:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+/* ============================================================
+   SPINNER DE CARGA
+   ============================================================ */
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  display: inline-block;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ============================================================
+   PIE DE TARJETA
+   ============================================================ */
+.footer-note {
+  margin-top: 20px;
+  font-size: 0.82rem;
+  color: #94a3b8;
+  text-align: center;
+}
+
+/* ============================================================
+   RESPONSIVE — pantallas pequeñas
+   ============================================================ */
+@media (max-width: 768px) {
+  .login-banner {
+    display: none;
+  }
+
+  .login-panel {
+    flex: unset;
+    width: 100%;
+    padding: 24px 16px;
+    background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%);
+  }
+
+  .login-card {
+    padding: 32px 24px;
+  }
+}

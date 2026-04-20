@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crear Técnico — MiSaaS</title>
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/header.css" />
+  <link rel="stylesheet" href="../css/forms.css" />
+</head>
+<body>
+
+  <div id="app-header"></div>
+
+  <main class="form-page-container">
+    <h2 id="pageTitle">👷 Crear nuevo Técnico</h2>
+
+    <div id="formAlert" class="form-alert error hidden"></div>
+
+    <!-- ── DATOS BÁSICOS ────────────────────────────────────── -->
+    <div class="form-section-card">
+      <h3>📋 Datos del técnico</h3>
+      <div class="fields-grid">
+
+        <div class="form-group full-width">
+          <label for="nombre">Nombre completo *</label>
+          <input type="text" id="nombre" placeholder="Carlos García" />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email *</label>
+          <input type="email" id="email" placeholder="carlos@empresa.com" />
+          <small id="emailHelp" style="color:#64748b;display:block;margin-top:6px;">El email se usa para el acceso al sistema.</small>
+        </div>
+
+        <div class="form-group">
+          <label for="telefono">Teléfono *</label>
+          <input type="tel" id="telefono" placeholder="600 000 000" />
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── CÓDIGOS POSTALES ──────────────────────────────────── -->
+    <div class="form-section-card">
+      <h3>📮 Códigos Postales de cobertura *</h3>
+
+      <div class="cp-input-row">
+        <div class="form-group" style="flex:1;margin:0;">
+          <input type="text" id="cpInput" maxlength="5" placeholder="Ej: 28001 o 08* (comodín)" />
+        </div>
+        <button type="button" class="btn-primary" id="btnAddCp">+ Añadir</button>
+      </div>
+
+      <div class="tags-container" id="tagsContainer">
+        <span style="color:#cbd5e1;font-size:0.83rem;align-self:center;">
+          Añade al menos un CP...
+        </span>
+      </div>
+
+      <p class="tags-hint">
+        💡 CP exacto: <strong>28001</strong> &nbsp;|&nbsp;
+        Comodín (toda una provincia): <strong>08*</strong>, <strong>17*</strong>
+      </p>
+    </div>
+
+    <!-- ── ACCIONES ───────────────────────────────────────────── -->
+    <div class="form-actions">
+      <a href="../home.html" class="btn-secondary">← Cancelar</a>
+      <button type="button" class="btn-primary" id="btnGuardar">
+        <span id="btnGuardarText">✅ Crear Técnico</span>
+        <span id="btnGuardarSpinner" class="spinner hidden"></span>
+      </button>
+    </div>
+
+  </main>
+
+  <!-- Modal de éxito con contraseña temporal -->
+  <div class="modal-overlay hidden" id="modalExito">
+    <div class="modal-box">
+      <div class="modal-icon">🎉</div>
+      <h3 id="successTitle">Técnico creado</h3>
+      <p id="successMessage">Comparte esta contraseña temporal con el técnico para su primer acceso:</p>
+      <div class="password-box" id="modalPassword">—</div>
+      <p id="successWarning" style="font-size:0.8rem;color:#ef4444;margin-bottom:20px;">
+        ⚠️ Cópiala ahora — no se volverá a mostrar.
+      </p>
+      <button class="btn-primary" id="btnModalOk" style="width:100%;">Entendido, ir al inicio</button>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="../js/config.js"></script>
+  <script src="../components/header.js"></script>
+  <script src="../js/tecnico.js"></script>
+  <script>
+    renderHeader('../');
+    initCrearTecnico();
+  </script>
+
+</body>
+</html>

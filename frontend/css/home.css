@@ -1,0 +1,75 @@
+/* ============================================================
+   home.css — Estilos del dashboard / página principal
+   ============================================================ */
+
+.home-container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 44px 24px 64px;
+}
+
+.home-container h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 8px;
+}
+
+.home-container .subtitle {
+  font-size: 0.93rem;
+  color: #64748b;
+  margin-bottom: 32px;
+}
+
+/* ── Grid de cards ──────────────────────────────────────────── */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 18px;
+}
+
+/* ── Card individual ────────────────────────────────────────── */
+.card {
+  background: linear-gradient(180deg, #fff 0%, #f8fbff 100%);
+  border-radius: 18px;
+  padding: 26px 24px;
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  border: 1px solid #dbe2ea;
+  transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 22px 42px rgba(15, 23, 42, 0.12);
+  border-color: #b8cdfa;
+}
+
+.card-icon {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.card-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.card-desc {
+  font-size: 0.83rem;
+  color: #94a3b8;
+  line-height: 1.5;
+}
+
+/* ── Colores de acento por card ─────────────────────────────── */
+.card-sat    .card-icon { color: #1d4ed8; }
+.card-client .card-icon { color: #0f766e; }
+.card-tech   .card-icon { color: #b45309; }
+.card-list   .card-icon { color: #6d28d9; }

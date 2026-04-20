@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crear SAT — MiSaaS</title>
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/header.css" />
+  <link rel="stylesheet" href="../css/sat.css" />
+</head>
+<body>
+
+  <div id="app-header"></div>
+
+  <main class="sat-container">
+    <h2>🧾 Crear nuevo SAT</h2>
+
+    <div id="tabError" class="tab-error hidden"></div>
+
+    <div class="tab-indicator">
+      <div class="tab-step active" id="step1">
+        <span class="tab-step-num">1</span>
+        <span>Cliente y Horarios</span>
+      </div>
+      <div class="tab-step" id="step2">
+        <span class="tab-step-num">2</span>
+        <span>Servicios y Técnico</span>
+      </div>
+    </div>
+
+    <div class="tab-panel active" id="tab1">
+
+      <div class="sat-card">
+        <h3>🏢 Cliente y Domicilio</h3>
+        <div class="fields-grid">
+
+          <div class="form-group">
+            <label for="clienteSelect">Cliente *</label>
+            <select id="clienteSelect">
+              <option value="">— Selecciona un cliente —</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="domicilioSelect">Domicilio *</label>
+            <select id="domicilioSelect" disabled>
+              <option value="">— Primero selecciona un cliente —</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="fechaProgramada">Fecha programada *</label>
+            <input type="date" id="fechaProgramada" />
+          </div>
+
+        </div>
+
+        <div id="historialBox" class="hidden" style="margin-top:16px;">
+          <p style="font-size:0.82rem;color:#64748b;font-weight:600;margin-bottom:8px;">
+            Historial de SATs del cliente
+          </p>
+          <div id="historialLista" style="font-size:0.85rem;color:#334155;"></div>
+        </div>
+      </div>
+
+      <div class="sat-card">
+        <h3>🕐 Horarios y Disponibilidad</h3>
+        <div class="fields-grid">
+
+          <div class="form-group">
+            <label for="horarioInicio">Horario inicio *</label>
+            <input type="time" id="horarioInicio" />
+          </div>
+
+          <div class="form-group">
+            <label for="horarioFin">Horario fin *</label>
+            <input type="time" id="horarioFin" />
+          </div>
+
+          <div class="form-group full-width">
+            <label>Días disponibles *</label>
+            <div class="days-grid">
+              <input type="checkbox" class="day-chip" id="dLun" value="Lunes" /><label for="dLun">Lun</label>
+              <input type="checkbox" class="day-chip" id="dMar" value="Martes" /><label for="dMar">Mar</label>
+              <input type="checkbox" class="day-chip" id="dMie" value="Miércoles" /><label for="dMie">Mié</label>
+              <input type="checkbox" class="day-chip" id="dJue" value="Jueves" /><label for="dJue">Jue</label>
+              <input type="checkbox" class="day-chip" id="dVie" value="Viernes" /><label for="dVie">Vie</label>
+              <input type="checkbox" class="day-chip" id="dSab" value="Sábado" /><label for="dSab">Sáb</label>
+              <input type="checkbox" class="day-chip" id="dDom" value="Domingo" /><label for="dDom">Dom</label>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="sat-card">
+        <h3>📝 Descripción del problema <span style="font-weight:400;color:#94a3b8;font-size:0.85rem;">(opcional)</span></h3>
+        <div class="form-group">
+          <textarea id="descripcion" placeholder="Describe brevemente el problema o motivo del servicio..."></textarea>
+        </div>
+      </div>
+
+      <div class="sat-actions">
+        <a href="../home.html" class="btn-secondary">← Cancelar</a>
+        <button class="btn-primary" id="btnSiguiente">Siguiente →</button>
+      </div>
+
+    </div>
+    <div class="tab-panel" id="tab2">
+
+      <div class="sat-card">
+        <h3>👷 Asignación de Técnico</h3>
+        <div class="fields-grid">
+          <div class="form-group">
+            <label for="tecnicoSelect">Técnico asignado *</label>
+            <select id="tecnicoSelect">
+              <option value="">— Selecciona un técnico —</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>CP del domicilio</label>
+            <input type="text" id="cpInfo" readonly style="background:#f1f5f9;color:#64748b;" placeholder="Se carga al seleccionar domicilio" />
+          </div>
+        </div>
+      </div>
+
+      <div class="sat-card">
+        <h3>🔧 Reparaciones</h3>
+        <div class="check-group">
+          <label class="check-item"><input type="checkbox" name="rep" value="valvula" /> Válvula</label>
+          <label class="check-item"><input type="checkbox" name="rep" value="bomba" /> Bomba</label>
+          <label class="check-item"><input type="checkbox" name="rep" value="filtro" /> Filtro</label>
+          <label class="check-item"><input type="checkbox" name="rep" value="caudalimetro" /> Caudalímetro</label>
+          <label class="check-item"><input type="checkbox" name="rep" value="inyector" /> Inyector</label>
+        </div>
+      </div>
+
+      <div class="sat-card">
+        <h3>🔩 Instalaciones</h3>
+        <div class="instalacion-row">
+          <select id="tipoDosificador">
+            <option value="">— Tipo de dosificador —</option>
+            <option value="peristaltica">Bomba peristáltica</option>
+            <option value="pistón">Bomba de pistón</option>
+            <option value="solenoide">Bomba solenoide</option>
+            <option value="gravedad">Dosificador por gravedad</option>
+          </select>
+          <input type="text" id="codigoProducto" placeholder="Código del producto (ej: PRD-001)" />
+        </div>
+      </div>
+
+      <div class="sat-card">
+        <h3>🔍 Revisiones</h3>
+        <div class="check-group">
+          <label class="check-item"><input type="checkbox" name="rev" value="general" /> Revisión general</label>
+          <label class="check-item"><input type="checkbox" name="rev" value="calibracion" /> Calibración</label>
+          <label class="check-item"><input type="checkbox" name="rev" value="mantenimiento" /> Mantenimiento</label>
+        </div>
+      </div>
+
+      <div class="sat-card">
+        <h3>🗺️ Zonas de trabajo</h3>
+        <div class="check-group">
+          <label class="check-item"><input type="checkbox" name="zona" value="cocina" /> Cocina</label>
+          <label class="check-item"><input type="checkbox" name="zona" value="lavanderia" /> Lavandería</label>
+          <label class="check-item"><input type="checkbox" name="zona" value="bar" /> Bar</label>
+          <label class="check-item"><input type="checkbox" name="zona" value="piscina" /> Piscina</label>
+          <label class="check-item"><input type="checkbox" name="zona" value="riego" /> Riego</label>
+        </div>
+      </div>
+
+      <div class="sat-actions">
+        <button class="btn-secondary" id="btnAnterior">← Anterior</button>
+        <div class="sat-actions-right">
+          <button class="btn-primary" id="btnCrearSat">✅ Crear SAT</button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <div class="modal-overlay hidden" id="modalOverlay">
+    <div class="modal-box">
+
+      <div class="modal-header">
+        <h3>Confirmar creación de SAT</h3>
+        <button class="modal-close" id="modalClose">✕</button>
+      </div>
+
+      <div class="modal-sat-num">
+        <div>
+          <div class="sat-num-label">Número de SAT generado</div>
+          <div class="sat-num-value" id="modalSatNum">—</div>
+        </div>
+      </div>
+
+      <div class="modal-summary" id="modalSummary">
+        <div class="summary-row">
+          <span class="s-label">Cliente</span>
+          <span class="s-value" id="sumCliente">—</span>
+        </div>
+        <div class="summary-row">
+          <span class="s-label">Domicilio</span>
+          <span class="s-value" id="sumDomicilio">—</span>
+        </div>
+        <div class="summary-row">
+          <span class="s-label">Fecha programada</span>
+          <span class="s-value" id="sumFechaProgramada">—</span>
+        </div>
+        <div class="summary-row">
+          <span class="s-label">Técnico</span>
+          <span class="s-value" id="sumTecnico">—</span>
+        </div>
+        <div class="summary-row">
+          <span class="s-label">Horario</span>
+          <span class="s-value" id="sumHorario">—</span>
+        </div>
+        <div class="summary-row">
+          <span class="s-label">Días</span>
+          <span class="s-value" id="sumDias">—</span>
+        </div>
+        <div class="summary-row">
+          <span class="s-label">Reparaciones</span>
+          <span class="s-value" id="sumReparaciones">—</span>
+        </div>
+        <div class="summary-row">
+          <span class="s-label">Instalación</span>
+          <span class="s-value" id="sumInstalacion">—</span>
+        </div>
+        <div class="summary-row">
+          <span class="s-label">Revisiones</span>
+          <span class="s-value" id="sumRevisiones">—</span>
+        </div>
+        <div class="summary-row">
+          <span class="s-label">Zonas</span>
+          <span class="s-value" id="sumZonas">—</span>
+        </div>
+        <div class="summary-row">
+          <span class="s-label">Estado inicial</span>
+          <span class="s-value" style="font-weight:700;color:#2563eb;">Asignar</span>
+        </div>
+      </div>
+
+      <!-- Botones del modal -->
+      <div class="modal-footer">
+        <button class="btn-secondary" id="modalCancelar">Cancelar</button>
+        <button class="btn-primary" id="modalConfirmar">
+          <span id="modalBtnText">Confirmar y crear</span>
+          <span id="modalSpinner" class="spinner hidden"></span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="../js/config.js"></script>
+  <script src="../components/header.js"></script>
+  <script src="../js/sat.js"></script>
+  <script>
+    renderHeader('../');
+    initSat();
+  </script>
+
+</body>
+</html>

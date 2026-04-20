@@ -1,0 +1,368 @@
+/* ============================================================
+   sat.css — Estilos del formulario Crear SAT
+   ============================================================ */
+
+.sat-container {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 40px 24px 64px;
+}
+
+.sat-container h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 18px;
+}
+
+/* ── Indicador de tabs ──────────────────────────────────────── */
+.tab-indicator {
+  display: flex;
+  gap: 0;
+  margin-bottom: 24px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1.5px solid #dbe2ea;
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.06);
+}
+
+.tab-step {
+  flex: 1;
+  padding: 12px;
+  text-align: center;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #94a3b8;
+  background: #f8fbff;
+  cursor: default;
+  transition: background 0.2s, color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.tab-step.active {
+  background: linear-gradient(135deg, #1d4ed8, #123f93);
+  color: #fff;
+}
+
+.tab-step.done {
+  background: #e7f8f3;
+  color: #0f766e;
+}
+
+.tab-step-num {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.78rem;
+  flex-shrink: 0;
+}
+
+.tab-step.active .tab-step-num {
+  background: rgba(255,255,255,0.25);
+}
+
+.tab-step.done .tab-step-num {
+  background: #16a34a;
+  color: #fff;
+}
+
+/* ── Paneles de tab ─────────────────────────────────────────── */
+.tab-panel {
+  display: none;
+}
+
+.tab-panel.active {
+  display: block;
+}
+
+/* ── Tarjeta de sección ─────────────────────────────────────── */
+.sat-card {
+  background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+  border-radius: 18px;
+  padding: 28px;
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.08);
+  margin-bottom: 20px;
+  border: 1px solid #dbe2ea;
+}
+
+.sat-card h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 18px;
+  padding-bottom: 10px;
+  border-bottom: 1.5px solid #e9eef5;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ── Grid de campos ─────────────────────────────────────────── */
+.fields-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.fields-grid .full-width {
+  grid-column: 1 / -1;
+}
+
+/* ── Checkboxes de días ─────────────────────────────────────── */
+.days-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.day-chip {
+  display: none;
+}
+
+.day-chip + label {
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1.5px solid #dbe2ea;
+  font-size: 0.83rem;
+  font-weight: 600;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.15s;
+  user-select: none;
+}
+
+.day-chip:checked + label {
+  background: linear-gradient(135deg, #1d4ed8, #123f93);
+  border-color: #1d4ed8;
+  color: #fff;
+}
+
+/* ── Checkboxes de servicio / zonas ─────────────────────────── */
+.check-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.check-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+  color: #374151;
+  cursor: pointer;
+}
+
+.check-item input[type="checkbox"] {
+  width: 17px;
+  height: 17px;
+  accent-color: #1d4ed8;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* Instalaciones — campo código producto ─────────────────────── */
+.instalacion-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.instalacion-row select {
+  flex: 1;
+  min-width: 160px;
+  padding: 10px 12px;
+  border: 1.5px solid #dbe2ea;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  background: #fafafa;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.instalacion-row select:focus {
+  border-color: #1d4ed8;
+}
+
+.instalacion-row input[type="text"] {
+  flex: 1;
+  min-width: 140px;
+  padding: 10px 12px;
+  border: 1.5px solid #dbe2ea;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  background: #fafafa;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.instalacion-row input[type="text"]:focus {
+  border-color: #1d4ed8;
+}
+
+/* ── Barra de acciones ──────────────────────────────────────── */
+.sat-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+  gap: 12px;
+}
+
+.sat-actions-right {
+  display: flex;
+  gap: 10px;
+}
+
+/* ── Error de validación de tab ──────────────────────────────── */
+.tab-error {
+  background: #fff5f5;
+  border: 1px solid #f8b4b4;
+  color: #b91c1c;
+  font-size: 0.86rem;
+  padding: 10px 14px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+
+/* ── Modal ──────────────────────────────────────────────────── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.55);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  backdrop-filter: blur(2px);
+}
+
+.modal-overlay.hidden {
+  display: none !important;
+}
+
+.modal-box {
+  background: #fff;
+  border-radius: 20px;
+  padding: 32px 28px;
+  max-width: 520px;
+  width: 100%;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.18);
+  animation: modalIn 0.22s ease;
+}
+
+@keyframes modalIn {
+  from { transform: scale(0.94); opacity: 0; }
+  to   { transform: scale(1);    opacity: 1; }
+}
+
+.modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.modal-header h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+  color: #94a3b8;
+  line-height: 1;
+  padding: 0;
+  transition: color 0.15s;
+}
+
+.modal-close:hover { color: #334155; }
+
+.modal-sat-num {
+  background: #eef4ff;
+  border: 1.5px solid #bfd0fb;
+  border-radius: 14px;
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.modal-sat-num .sat-num-label {
+  font-size: 0.8rem;
+  color: #64748b;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.modal-sat-num .sat-num-value {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #1d4ed8;
+}
+
+.modal-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.summary-row {
+  display: flex;
+  font-size: 0.88rem;
+  gap: 8px;
+}
+
+.summary-row .s-label {
+  color: #64748b;
+  font-weight: 600;
+  min-width: 130px;
+}
+
+.summary-row .s-value {
+  color: #1e293b;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .fields-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .fields-grid .full-width {
+    grid-column: 1;
+  }
+
+  .sat-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .sat-actions-right {
+    flex-direction: column;
+  }
+}
