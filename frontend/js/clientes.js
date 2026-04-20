@@ -3,7 +3,7 @@
 // ============================================================
 
 function initClientes() {
-  const BACKEND = 'http://localhost:3000';
+  const BACKEND = '/api';
   const listContainer = document.getElementById('clientesList');
   const alertBox = document.getElementById('clientesAlert');
   const emptyBox = document.getElementById('clientesEmpty');

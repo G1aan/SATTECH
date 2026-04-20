@@ -3,7 +3,7 @@
 // ============================================================
 
 function initSatsList() {
-  const BACKEND = 'http://localhost:3000';
+  const BACKEND = '/api';
   const listPage = document.querySelector('.list-page');
   const listContainer = document.getElementById('satsList');
   const alertBox = document.getElementById('satsAlert');

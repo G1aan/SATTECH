@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      const response = await fetch('http://localhost:3000/api/me', {
+      const response = await fetch('/api/me', {
         headers: {
           Authorization: `Bearer ${token}`,
         },

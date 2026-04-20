@@ -3,7 +3,7 @@
 // ============================================================
 
 function initTecnicos() {
-  const BACKEND = 'http://localhost:3000';
+  const BACKEND = '/api';
   const listContainer = document.getElementById('tecnicosList');
   const alertBox = document.getElementById('tecnicosAlert');
   const emptyBox = document.getElementById('tecnicosEmpty');

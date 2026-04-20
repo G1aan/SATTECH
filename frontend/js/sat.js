@@ -3,7 +3,7 @@
 // ============================================================
 
 async function initSat() {
-  const BACKEND = 'http://localhost:3000';
+  const BACKEND = '/api';
 
   const { data: sessionData } = await supabaseClient.auth.getSession();
   const session = sessionData?.session;

@@ -1,5 +1,5 @@
 function initCrearCliente() {
-  const BACKEND = 'http://localhost:3000';
+  const BACKEND = '/api';
   const clienteId = new URLSearchParams(window.location.search).get('id');
   const isEditMode = Boolean(clienteId);
   document.title = isEditMode ? 'Ficha de cliente — MiSaaS' : 'Crear Cliente — MiSaaS';

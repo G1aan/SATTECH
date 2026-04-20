@@ -4,7 +4,7 @@
 
 function initCrearTecnico() {
 
-  const BACKEND = 'http://localhost:3000';
+  const BACKEND = '/api';
   const tecnicoId = new URLSearchParams(window.location.search).get('id');
   const isEditMode = Boolean(tecnicoId);
 
