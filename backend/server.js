@@ -681,16 +681,6 @@ app.delete('/api/clients/:id', requireAuth, async (req, res) => {
       return res.status(500).json({ error: domiciliosDeleteError.message });
     }
 
-    const { error: zonasDeleteError } = await supabaseAdmin
-      .from('zonas_cliente')
-      .delete()
-      .eq('cliente_id', req.params.id);
-
-    if (zonasDeleteError) {
-      console.error('Error deleting client zones:', zonasDeleteError);
-      return res.status(500).json({ error: zonasDeleteError.message });
-    }
-
     const { error: clientDeleteError } = await supabaseAdmin
       .from('clientes')
       .delete()
