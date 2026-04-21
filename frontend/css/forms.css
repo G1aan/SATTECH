@@ -285,6 +285,30 @@
   text-align: center;
 }
 
+.modal-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.modal-confirm {
+  text-align: center;
+}
+
+.modal-icon-danger {
+  color: #b91c1c;
+}
+
+.modal-spinner {
+  margin-top: 8px;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+}
+
 @keyframes modalIn {
   from { transform: scale(0.94); opacity: 0; }
   to   { transform: scale(1);    opacity: 1; }
@@ -341,6 +365,14 @@
   .form-actions-right .btn-danger,
   .form-actions-right .btn-primary,
   .form-actions-right .btn-secondary {
+    width: 100%;
+  }
+  .modal-actions {
+    flex-direction: column;
+  }
+  .modal-actions .btn-primary,
+  .modal-actions .btn-secondary,
+  .modal-actions .btn-danger {
     width: 100%;
   }
 }

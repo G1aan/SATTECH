@@ -18,11 +18,70 @@ function initCrearCliente() {
   const modalExitoTitle = document.getElementById('modalExitoTitle');
   const modalExitoMsg = document.getElementById('modalExitoMsg');
   const btnModalOk = document.getElementById('btnModalOk');
+  const clientLoadingModal = document.getElementById('clientLoadingModal');
+  const clientLoadingTitle = document.getElementById('clientLoadingTitle');
+  const clientLoadingMessage = document.getElementById('clientLoadingMessage');
+  const clientDeleteModal = document.getElementById('clientDeleteModal');
+  const clientDeleteTitle = document.getElementById('clientDeleteTitle');
+  const clientDeleteMessage = document.getElementById('clientDeleteMessage');
+  const clientDeleteCancel = document.getElementById('clientDeleteCancel');
+  const clientDeleteConfirm = document.getElementById('clientDeleteConfirm');
 
   let domicilioCount = 0;
+  let activeModal = null;
+  let deleteInFlight = false;
+
+  function showModal(modal) {
+    if (activeModal && activeModal !== modal) {
+      activeModal.classList.add('hidden');
+    }
+
+    modal.classList.remove('hidden');
+    activeModal = modal;
+    document.body.style.overflow = 'hidden';
+  }
+
+  function hideModal(modal) {
+    if (!modal.classList.contains('hidden')) {
+      modal.classList.add('hidden');
+    }
+
+    if (activeModal === modal) {
+      activeModal = null;
+      document.body.style.overflow = '';
+    }
+  }
+
+  function showLoadingModal(title, message) {
+    clientLoadingTitle.textContent = title;
+    clientLoadingMessage.textContent = message;
+    showModal(clientLoadingModal);
+  }
+
+  function hideLoadingModal() {
+    hideModal(clientLoadingModal);
+  }
+
+  function showDeleteModal() {
+    const nombre = document.getElementById('nombre').value.trim();
+    clientDeleteTitle.textContent = 'Eliminar cliente';
+    clientDeleteMessage.textContent = `Vas a eliminar a "${nombre || 'este cliente'}". Esta acción no se puede deshacer.`;
+    showModal(clientDeleteModal);
+  }
+
+  function hideDeleteModal() {
+    hideModal(clientDeleteModal);
+  }
+
+  function showSuccessModal(title, message, buttonText) {
+    modalExitoTitle.textContent = title;
+    modalExitoMsg.textContent = message;
+    btnModalOk.textContent = buttonText;
+    showModal(modalExito);
+  }
 
   // Ajusta el estado del formulario según si está cargando o no.
-  function setLoading(isLoading) {
+  function setLoading(isLoading, title, message) {
     btnGuardar.disabled = isLoading;
     btnAddDomicilio.disabled = isLoading;
     if (btnEliminar) {
@@ -32,10 +91,18 @@ function initCrearCliente() {
     btnGuardarText.textContent = isEditMode
       ? (isLoading ? 'Guardando...' : '💾 Guardar cambios')
       : (isLoading ? 'Guardando...' : '✅ Crear Cliente');
+
+    if (isLoading) {
+      showLoadingModal(title, message);
+    } else {
+      hideLoadingModal();
+    }
   }
 
   // Muestra un mensaje de error en la parte superior.
   function mostrarError(msg) {
+    hideLoadingModal();
+    hideDeleteModal();
     formAlert.textContent = msg;
     formAlert.className = 'form-alert error';
     formAlert.classList.remove('hidden');
@@ -168,44 +235,50 @@ function initCrearCliente() {
 
   // Carga la ficha del cliente cuando estamos editando.
   async function cargarCliente() {
-    const token = await getSessionToken();
-    if (!token) {
-      mostrarError('Sesión expirada. Vuelve a iniciar sesión.');
-      return false;
+    setLoading(true, 'Cargando cliente', 'Estamos preparando la ficha del cliente.');
+
+    try {
+      const token = await getSessionToken();
+      if (!token) {
+        mostrarError('Sesión expirada. Vuelve a iniciar sesión.');
+        return false;
+      }
+
+      const response = await fetch(`${BACKEND}/api/clients/${clienteId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const json = await response.json();
+      if (!response.ok) {
+        mostrarError(json.error || 'No se pudo cargar el cliente.');
+        return false;
+      }
+
+      const { cliente, domicilios } = json;
+      pageTitle.textContent = '👁️ Ficha de cliente';
+      codigoInput.value = cliente.codigo || '';
+      codigoInput.readOnly = true;
+      document.getElementById('nombre').value = cliente.nombre || '';
+      document.getElementById('email').value = cliente.email || '';
+      document.getElementById('telefono').value = cliente.telefono || '';
+      document.getElementById('horarioInicio').value = cliente.horario_inicio || '';
+      document.getElementById('horarioFin').value = cliente.horario_fin || '';
+      btnGuardarText.textContent = '💾 Guardar cambios';
+      btnEliminar.classList.remove('hidden');
+
+      domiciliosCont.innerHTML = '';
+      domicilioCount = 0;
+      (domicilios || []).forEach((domicilio) => addDomicilio(domicilio));
+      if ((domicilios || []).length === 0) {
+        addDomicilio();
+      }
+
+      return true;
+    } finally {
+      setLoading(false);
     }
-
-    const response = await fetch(`${BACKEND}/api/clients/${clienteId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-
-    const json = await response.json();
-    if (!response.ok) {
-      mostrarError(json.error || 'No se pudo cargar el cliente.');
-      return false;
-    }
-
-    const { cliente, domicilios } = json;
-    pageTitle.textContent = '👁️ Ficha de cliente';
-    codigoInput.value = cliente.codigo || '';
-    codigoInput.readOnly = true;
-    document.getElementById('nombre').value = cliente.nombre || '';
-    document.getElementById('email').value = cliente.email || '';
-    document.getElementById('telefono').value = cliente.telefono || '';
-    document.getElementById('horarioInicio').value = cliente.horario_inicio || '';
-    document.getElementById('horarioFin').value = cliente.horario_fin || '';
-    btnGuardarText.textContent = '💾 Guardar cambios';
-    btnEliminar.classList.remove('hidden');
-
-    domiciliosCont.innerHTML = '';
-    domicilioCount = 0;
-    (domicilios || []).forEach((domicilio) => addDomicilio(domicilio));
-    if ((domicilios || []).length === 0) {
-      addDomicilio();
-    }
-
-    return true;
   }
 
   // Guarda el cliente, creando o actualizando según toque.
@@ -228,7 +301,7 @@ function initCrearCliente() {
       return;
     }
 
-    setLoading(true);
+    setLoading(true, isEditMode ? 'Guardando cliente' : 'Creando cliente', 'Por favor, espera un momento.');
 
     try {
       const token = await getSessionToken();
@@ -263,11 +336,13 @@ function initCrearCliente() {
         return;
       }
 
-      modalExitoTitle.textContent = isEditMode ? 'Cliente actualizado' : 'Cliente creado';
-      modalExitoMsg.textContent = isEditMode
+      showSuccessModal(
+        isEditMode ? 'Cliente actualizado' : 'Cliente creado',
+        isEditMode
         ? `Los cambios de "${datos.nombre}" se guardaron correctamente.`
-        : `El cliente "${datos.nombre}" ha sido registrado correctamente.`;
-      modalExito.classList.remove('hidden');
+          : `El cliente "${datos.nombre}" ha sido registrado correctamente.`,
+        'Ir al listado'
+      );
     } catch (error) {
       mostrarError('Error de conexión con el servidor.');
     } finally {
@@ -275,14 +350,14 @@ function initCrearCliente() {
     }
   }
 
-  // Elimina el cliente actual tras confirmación.
-  async function eliminarCliente() {
-    const confirmado = window.confirm('¿Seguro que quieres eliminar este cliente?');
-    if (!confirmado) {
+  async function confirmarEliminacion() {
+    if (deleteInFlight) {
       return;
     }
 
-    setLoading(true);
+    hideDeleteModal();
+    deleteInFlight = true;
+    setLoading(true, 'Eliminando cliente', 'Por favor, espera un momento.');
 
     try {
       const token = await getSessionToken();
@@ -304,24 +379,38 @@ function initCrearCliente() {
         return;
       }
 
-      window.location.href = 'clientes.html';
+      showSuccessModal('Cliente eliminado', 'El cliente se ha eliminado correctamente.', 'Volver al listado');
     } catch (error) {
       mostrarError('Error de conexión con el servidor.');
     } finally {
+      deleteInFlight = false;
       setLoading(false);
     }
   }
 
   btnAddDomicilio.addEventListener('click', () => addDomicilio());
   btnGuardar.addEventListener('click', guardarCliente);
+  btnEliminar.addEventListener('click', showDeleteModal);
+  clientDeleteCancel.addEventListener('click', hideDeleteModal);
+  clientDeleteConfirm.addEventListener('click', confirmarEliminacion);
   btnModalOk.addEventListener('click', () => {
     window.location.href = 'clientes.html';
+  });
+  clientDeleteModal.addEventListener('click', (event) => {
+    if (event.target === clientDeleteModal) {
+      hideDeleteModal();
+    }
+  });
+  modalExito.addEventListener('click', (event) => {
+    if (event.target === modalExito) {
+      hideModal(modalExito);
+      window.location.href = 'clientes.html';
+    }
   });
 
   if (isEditMode) {
     pageTitle.textContent = '⏳ Cargando cliente...';
     btnGuardarText.textContent = '💾 Guardar cambios';
-    btnEliminar.addEventListener('click', eliminarCliente);
     cargarCliente().then((loaded) => {
       if (!loaded) {
         btnEliminar.classList.add('hidden');
