@@ -17,6 +17,10 @@
   backdrop-filter: blur(10px);
 }
 
+.app-header-loading {
+  pointer-events: none;
+}
+
 /* ── Logo / marca ───────────────────────────────────────────── */
 .header-brand .header-logo {
   font-size: 1.3rem;
@@ -47,6 +51,50 @@
   transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
   border: none;
   font-family: inherit;
+}
+
+.header-skeleton {
+  position: relative;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.header-skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.24), transparent);
+  animation: header-skeleton-shimmer 1.15s infinite;
+}
+
+.header-skeleton-brand {
+  width: 118px;
+  height: 22px;
+  border-radius: 999px;
+  display: inline-block;
+}
+
+.header-skeleton-pill {
+  display: inline-flex;
+  width: 120px;
+  height: 34px;
+  border-radius: 999px;
+}
+
+.header-skeleton-pill-home {
+  width: 96px;
+}
+
+.header-skeleton-pill-logout {
+  width: 138px;
+}
+
+.header-skeleton-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  flex-shrink: 0;
 }
 
 .btn-nav-home {
@@ -94,4 +142,10 @@
 @media (max-width: 600px) {
   .app-header { padding: 0 16px; }
   .btn-nav span { display: none; }
+}
+
+@keyframes header-skeleton-shimmer {
+  100% {
+    transform: translateX(100%);
+  }
 }
